@@ -2,6 +2,7 @@ import React from "react";
 
 function Navbar() {
   return (
+    <>
     <nav className="navbar navbar-expand navbar-light navbar-bg">
       <a className="sidebar-toggle js-sidebar-toggle" >
         <i className="hamburger align-self-center"></i>
@@ -38,11 +39,13 @@ function Navbar() {
       <div className="navbar-collapse collapse">
         <ul className="navbar-nav navbar-align">
          <li>
-         <button className="btn btn-outline-danger"> Logout</button>
+          <a href="/">
+         <button className="btn btn-outline-danger"> Logout</button></a>
          </li>
         </ul>
       </div>
     </nav>
+    </>
   );
 }
 

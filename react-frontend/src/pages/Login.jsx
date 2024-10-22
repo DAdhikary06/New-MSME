@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
-import '@adminkit/core/dist/css/app.css';
+import React, { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import AuthHandler from '../utils/Authhandler';
 import Config from '../utils/Config';
 import { useNavigate } from 'react-router-dom';
+import '@adminkit/core/dist/css/app.css';
 
 const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState(0);
+
+  useEffect(() => {
+    // If user is already logged in, redirect to home page
+    if (AuthHandler.loggedIn()) {
+      navigate(Config.homeUrl);
+    }
+  }, []);
 
   const saveInputs = (event) => {
     const { name, value } = event.target;
@@ -29,7 +35,6 @@ const Login = () => {
         return;
       } else {
         setLoginStatus(1);
-        
         AuthHandler.login(username, password, handleAjaxResponse);
       }
     } catch (error) {
@@ -117,7 +122,7 @@ const Login = () => {
         </div>
       </div>
     </main>
-  )
-}
+  );
+};
 
 export default Login;

@@ -7,10 +7,9 @@ const AuthHandler = {
       .post(Config.loginUrl, { username: username, password: password })
       .then((response) => {
         if (response.status === 200) {
-          
           localStorage.setItem("token", response.data.access);
           localStorage.setItem("refresh", response.data.refresh);
-          callback({ error: false, message: "Login Successfull..." });
+          callback({ error: false, message: "Login Successful..." });
         }
       })
       .catch((error) => {
@@ -20,6 +19,9 @@ const AuthHandler = {
         });
       });
   },
+  loggedIn: () => {
+    return !!localStorage.getItem("token") && !!localStorage.getItem("refresh");
+  }
 };
 
 export default AuthHandler;
